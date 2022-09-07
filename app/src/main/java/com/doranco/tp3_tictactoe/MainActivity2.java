@@ -41,7 +41,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         winningsMid = new ArrayList<>();
         winningsMid.add(winnings[1]);
-        winningsMid.add(winnings[4]);
+        // winningsMid.add(winnings[4]);
         //winningsMid.add(winnings[6]);
         //winningsMid.add(winnings[7]);
 
