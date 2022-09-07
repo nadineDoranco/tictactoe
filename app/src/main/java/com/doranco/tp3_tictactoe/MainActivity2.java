@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity2 extends AppCompatActivity {
 
     //  0  1  2
     //  3  4  5
@@ -16,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public Button[] buttons;
     public String[] grid;
     public String[] winnings;
+    public List<String> winningsMid;
     int tour =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +39,23 @@ public class MainActivity extends AppCompatActivity {
         winnings[6] = "048";
         winnings[7] = "642";
 
+        winningsMid = new ArrayList<>();
+        winningsMid.add(winnings[1]);
+        winningsMid.add(winnings[4]);
+        winningsMid.add(winnings[6]);
+        winningsMid.add(winnings[7]);
+
+        System.out.println(winningsMid.get(0));
+
         buttons[0]= findViewById(R.id.btn0);
         buttons[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 playTurn(0);
+                botStrategy("O");
             }
         });
-       buttons[1]=(findViewById(R.id.btn1));
+        buttons[1]=(findViewById(R.id.btn1));
         buttons[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,24 +123,57 @@ public class MainActivity extends AppCompatActivity {
         buttons[buttonIndex].setText(element);
         buttons[buttonIndex].setOnClickListener(null);
 
-        // Si le contenu d'un bouton = X
-        // on génère un autre nombre aléatoire
-
-        if(grid[result] == element) {
-            result = (int) ((Math.random() * (0 - 9)) + 9);
-            grid[result] = elementO;
-            buttons[result].setText(elementO);
-            buttons[result].setOnClickListener(null);
-        } else {
-            grid[result] = elementO;
-            buttons[result].setText(elementO);
-            buttons[result].setOnClickListener(null);
-        }
+        // Si le contenu du bouton du milieu = X
+        // on cherche dans les winnings dont chartAt(1) != 4
+        // SINON!
+        // on cherche dans les winnings dont chartAt(1) = 4
+        // il met le rond au milieu
+        // l'utilisateur met ailleurs
+        // On regarde le charAt(0) & charAt(2)
+        // Si disponible, l'un ou l'autre
+        // Si l'un, alors l'autre
 
         tour++;
         checkwin(element);
 
     }
+
+    public void botStrategy(String element)
+    {
+        for (String winning : winningsMid) {
+            int first = Character.getNumericValue(winning.charAt(1));
+
+            if (grid[first] != element) {
+                grid[4] = element;
+                buttons[4].setText(element);
+                buttons[4].setOnClickListener(null);
+            }
+            int second = Character.getNumericValue(winning.charAt(0));
+            if (grid[second] != element) {
+                playTurn(second);
+            }
+            int third = Character.getNumericValue(winning.charAt(2));
+            if (grid[third] != element) {
+                playTurn(third);
+            }
+
+            if (element == "X") {
+                gameDone(1);
+                continue;
+            } else {
+                gameDone(2);
+                continue;
+            }
+        }
+        if(tour == 9){
+            gameDone(0);
+        }
+    }
+
+
+
+
+
 
     public void checkwin(String element)
     {
@@ -158,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
             gameDone(0);
         }
     }
+
+
     public void gameDone(int winingOptions)
     {
         if(winingOptions == 0)
@@ -177,6 +225,8 @@ public class MainActivity extends AppCompatActivity {
     public void resetBtns(View view) {
         for(int i=0; i < 9; i++){
             buttons[i].setText("");
+            // buttons[i].setOnClickListener();
+
         }
     }
 
