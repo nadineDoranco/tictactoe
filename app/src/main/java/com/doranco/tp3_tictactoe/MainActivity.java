@@ -171,17 +171,10 @@ public class MainActivity extends AppCompatActivity {
         for(Button button:buttons){
             button.setOnClickListener(null);
         }
-
-    }
-
-    public void resetBtns(View view) {
-        for(int i=0; i < 9; i++){
-            buttons[i].setText("");
-        }
     }
 
     public void goToActivity2(View view){
-        Intent intent = new Intent(this, MainActivity2.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

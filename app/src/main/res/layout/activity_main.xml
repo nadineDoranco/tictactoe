@@ -84,18 +84,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--<Button
+        <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:text="Reset"
-            android:onClick="resetBtns"/>-->
-        <Button
+            android:text="Rejouer"
+            android:onClick="goToActivity2"/>
+
+        <!-- <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:text="Niveau 2"
-            android:onClick="goToActivity2"/>
+            android:onClick="goToActivity2"/> -->
     </LinearLayout>
 
 
