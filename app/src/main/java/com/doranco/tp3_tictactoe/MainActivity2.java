@@ -42,8 +42,8 @@ public class MainActivity2 extends AppCompatActivity {
         winningsMid = new ArrayList<>();
         winningsMid.add(winnings[1]);
         winningsMid.add(winnings[4]);
-        winningsMid.add(winnings[6]);
-        winningsMid.add(winnings[7]);
+        //winningsMid.add(winnings[6]);
+        //winningsMid.add(winnings[7]);
 
         System.out.println(winningsMid.get(0));
 
@@ -60,6 +60,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn( 1);
+                botStrategy("O");
             }
         });
         buttons[2]=(findViewById(R.id.btn2));
@@ -67,6 +68,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn( 2);
+                botStrategy("O");
             }
         });
         buttons[3]=(findViewById(R.id.btn3));
@@ -74,6 +76,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn(3);
+                botStrategy("O");
             }
         });
         buttons[4]=(findViewById(R.id.btn4));
@@ -81,6 +84,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn(4);
+                botStrategy("O");
             }
         });
         buttons[5]=(findViewById(R.id.btn5));
@@ -88,6 +92,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn(5);
+                botStrategy("O");
             }
         });
         buttons[6]=(findViewById(R.id.btn6));
@@ -95,6 +100,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn(6);
+                botStrategy("O");
             }
         });
         buttons[7]=(findViewById(R.id.btn7));
@@ -102,6 +108,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn(7);
+                botStrategy("O");
             }
         });
         buttons[8]=(findViewById(R.id.btn8));
@@ -109,6 +116,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playTurn(8);
+                botStrategy("O");
             }
         });
     }
@@ -144,30 +152,28 @@ public class MainActivity2 extends AppCompatActivity {
             int first = Character.getNumericValue(winning.charAt(1));
 
             if (grid[first] != element) {
-                grid[4] = element;
-                buttons[4].setText(element);
-                buttons[4].setOnClickListener(null);
+                grid[first] = element;
+                buttons[first].setText(element);
+                buttons[first].setOnClickListener(null);
+                continue;
             }
             int second = Character.getNumericValue(winning.charAt(0));
             if (grid[second] != element) {
-                playTurn(second);
+                grid[second] = element;
+                buttons[second].setText(element);
+                buttons[second].setOnClickListener(null);
+                continue;
             }
             int third = Character.getNumericValue(winning.charAt(2));
             if (grid[third] != element) {
-                playTurn(third);
+                grid[third] = element;
+                buttons[third].setText(element);
+                buttons[third].setOnClickListener(null);
+                checkwin("O");
+                break;
             }
+        }
 
-            if (element == "X") {
-                gameDone(1);
-                continue;
-            } else {
-                gameDone(2);
-                continue;
-            }
-        }
-        if(tour == 9){
-            gameDone(0);
-        }
     }
 
 
