@@ -228,14 +228,6 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
-    public void resetBtns(View view) {
-        for(int i=0; i < 9; i++){
-            buttons[i].setText("");
-            // buttons[i].setOnClickListener();
-
-        }
-    }
-
     public void goToActivity2(View view){
         Intent intent = new Intent(this, MainActivity2.class);
         startActivity(intent);
